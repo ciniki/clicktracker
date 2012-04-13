@@ -45,7 +45,6 @@ function ciniki_clicktracker_statsByDays($ciniki) {
 		. "GROUP BY panel_id, item "
 		. "ORDER BY panel_id, item "
 		. "";
-	error_log($strsql);
     require_once($ciniki['config']['core']['modules_dir'] . '/core/private/dbHashQueryTree.php');
 	$rc = ciniki_core_dbHashQueryTree($ciniki, $strsql, 'clicktracker', 
 		array(
