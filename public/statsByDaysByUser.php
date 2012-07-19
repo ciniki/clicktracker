@@ -30,7 +30,7 @@ function ciniki_clicktracker_statsByDaysByUser($ciniki) {
     // check permission to run this function for this business
     //  
     require_once($ciniki['config']['core']['modules_dir'] . '/clicktracker/private/checkAccess.php');
-    $rc = ciniki_clicktracker_checkAccess($ciniki, $args['business_id'], 'ciniki.clicktracker.statsByDays'); 
+    $rc = ciniki_clicktracker_checkAccess($ciniki, $args['business_id'], 'ciniki.clicktracker.statsByDaysByUser'); 
     if( $rc['stat'] != 'ok' ) { 
         return $rc;
     }   
