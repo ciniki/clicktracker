@@ -49,7 +49,7 @@ function ciniki_clicktracker_add($ciniki) {
 		. "UTC_TIMESTAMP())"
 		. "";
     require_once($ciniki['config']['core']['modules_dir'] . '/core/private/dbInsert.php');
-	$rc = ciniki_core_dbInsert($ciniki, $strsql, 'clicktracker');
+	$rc = ciniki_core_dbInsert($ciniki, $strsql, 'ciniki.clicktracker');
 	if( $rc['stat'] != 'ok' ) { 
 		return $rc;
 	}

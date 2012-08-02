@@ -46,7 +46,7 @@ function ciniki_clicktracker_statsByDaysByUser($ciniki) {
 		. "ORDER BY display_name "
 		. "";
     require_once($ciniki['config']['core']['modules_dir'] . '/core/private/dbHashQueryTree.php');
-	$rc = ciniki_core_dbHashQueryTree($ciniki, $strsql, 'clicktracker', 
+	$rc = ciniki_core_dbHashQueryTree($ciniki, $strsql, 'ciniki.clicktracker', 
 		array(
 			array('container'=>'users', 'fname'=>'user_id', 'name'=>'user',
 				'fields'=>array('user_id', 'display_name')),
@@ -68,7 +68,7 @@ function ciniki_clicktracker_statsByDaysByUser($ciniki) {
 		. "GROUP BY panel_id, item, name "
 		. "ORDER BY panel_id, item, name "
 		. "";
-	$rc = ciniki_core_dbHashQueryTree($ciniki, $strsql, 'clicktracker', 
+	$rc = ciniki_core_dbHashQueryTree($ciniki, $strsql, 'ciniki.clicktracker', 
 		array(
 			array('container'=>'stats', 'fname'=>'cid', 'name'=>'stat',
 				'fields'=>array('panel_id', 'item', 'clicked'), 'sums'=>array('clicked')),

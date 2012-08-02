@@ -7,7 +7,9 @@
 //
 // Arguments
 // =========
+// ciniki:
 // business_id: 		The ID of the business the request is for.
+// method:				The requested method.
 // 
 // Returns
 // =======
@@ -44,7 +46,7 @@ function ciniki_clicktracker_checkAccess($ciniki, $business_id, $method) {
 		. "AND (permission_group = 'owners' OR permission_group = 'employees') "
 		. "";
 	require_once($ciniki['config']['core']['modules_dir'] . '/core/private/dbHashQuery.php');
-	$rc = ciniki_core_dbHashQuery($ciniki, $strsql, 'businesses', 'user');
+	$rc = ciniki_core_dbHashQuery($ciniki, $strsql, 'ciniki.businesses', 'user');
 	if( $rc['stat'] != 'ok' ) {
 		return $rc;
 	}
