@@ -1,0 +1,7 @@
+The click tracker information is collected for analysis to create a more 
+efficient interface.  It allows the developers to see which menu items
+are being used and which are not.
+
+This module data is not syncronized to remote servers, as it's not 
+important enough to take up sync bandwidth and processing.  Click tracking
+can be collected independantly on each system.
