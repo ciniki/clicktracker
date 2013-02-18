@@ -15,7 +15,7 @@ function ciniki_clicktracker_statsByDaysByUser($ciniki) {
     //  
     // Find all the required and optional arguments
     //  
-    require_once($ciniki['config']['core']['modules_dir'] . '/core/private/prepareArgs.php');
+    ciniki_core_loadMethod($ciniki, 'ciniki', 'core', 'private', 'prepareArgs');
     $rc = ciniki_core_prepareArgs($ciniki, 'no', array(
         'business_id'=>array('required'=>'yes', 'blank'=>'no', 'errmsg'=>'No business specified'), 
 		'days'=>array('required'=>'yes', 'blank'=>'no', 'errmsg'=>'No days specified'),
@@ -29,7 +29,7 @@ function ciniki_clicktracker_statsByDaysByUser($ciniki) {
     // Make sure this module is activated, and
     // check permission to run this function for this business
     //  
-    require_once($ciniki['config']['core']['modules_dir'] . '/clicktracker/private/checkAccess.php');
+    ciniki_core_loadMethod($ciniki, 'ciniki', 'clicktracker', 'private', 'checkAccess');
     $rc = ciniki_clicktracker_checkAccess($ciniki, $args['business_id'], 'ciniki.clicktracker.statsByDaysByUser'); 
     if( $rc['stat'] != 'ok' ) { 
         return $rc;
@@ -45,7 +45,7 @@ function ciniki_clicktracker_statsByDaysByUser($ciniki) {
 		. "AND ciniki_clicktracker.date_added >= DATE_SUB(UTC_TIMESTAMP(), INTERVAL '" . ciniki_core_dbQuote($ciniki, $args['days']) . "' DAY) "
 		. "ORDER BY display_name "
 		. "";
-    require_once($ciniki['config']['core']['modules_dir'] . '/core/private/dbHashQueryTree.php');
+    ciniki_core_loadMethod($ciniki, 'ciniki', 'core', 'private', 'dbHashQueryTree');
 	$rc = ciniki_core_dbHashQueryTree($ciniki, $strsql, 'ciniki.clicktracker', 
 		array(
 			array('container'=>'users', 'fname'=>'user_id', 'name'=>'user',

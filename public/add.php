@@ -15,7 +15,7 @@ function ciniki_clicktracker_add($ciniki) {
     //  
     // Find all the required and optional arguments
     //  
-    require_once($ciniki['config']['core']['modules_dir'] . '/core/private/prepareArgs.php');
+    ciniki_core_loadMethod($ciniki, 'ciniki', 'core', 'private', 'prepareArgs');
     $rc = ciniki_core_prepareArgs($ciniki, 'no', array(
         'business_id'=>array('required'=>'yes', 'blank'=>'no', 'errmsg'=>'No business specified'), 
         'panel_id'=>array('required'=>'yes', 'blank'=>'no', 'errmsg'=>'No panel specified'), 
@@ -30,7 +30,7 @@ function ciniki_clicktracker_add($ciniki) {
     // Make sure this module is activated, and
     // check permission to run this function for this business
     //  
-    require_once($ciniki['config']['core']['modules_dir'] . '/clicktracker/private/checkAccess.php');
+    ciniki_core_loadMethod($ciniki, 'ciniki', 'clicktracker', 'private', 'checkAccess');
     $rc = ciniki_clicktracker_checkAccess($ciniki, $args['business_id'], 'ciniki.clicktracker.add'); 
     if( $rc['stat'] != 'ok' ) { 
         return $rc;
@@ -48,7 +48,7 @@ function ciniki_clicktracker_add($ciniki) {
 		. "'" . ciniki_core_dbQuote($ciniki, $args['item']) . "', "
 		. "UTC_TIMESTAMP())"
 		. "";
-    require_once($ciniki['config']['core']['modules_dir'] . '/core/private/dbInsert.php');
+    ciniki_core_loadMethod($ciniki, 'ciniki', 'core', 'private', 'dbInsert');
 	$rc = ciniki_core_dbInsert($ciniki, $strsql, 'ciniki.clicktracker');
 	if( $rc['stat'] != 'ok' ) { 
 		return $rc;
