@@ -17,9 +17,9 @@ function ciniki_clicktracker_add($ciniki) {
     //  
     ciniki_core_loadMethod($ciniki, 'ciniki', 'core', 'private', 'prepareArgs');
     $rc = ciniki_core_prepareArgs($ciniki, 'no', array(
-        'business_id'=>array('required'=>'yes', 'blank'=>'no', 'errmsg'=>'No business specified'), 
-        'panel_id'=>array('required'=>'yes', 'blank'=>'no', 'errmsg'=>'No panel specified'), 
-        'item'=>array('required'=>'yes', 'blank'=>'no', 'errmsg'=>'No item specified'), 
+        'business_id'=>array('required'=>'yes', 'blank'=>'no', 'name'=>'Business'), 
+        'panel_id'=>array('required'=>'yes', 'blank'=>'no', 'name'=>'Panel'), 
+        'item'=>array('required'=>'yes', 'blank'=>'no', 'name'=>'Item'), 
         )); 
     if( $rc['stat'] != 'ok' ) { 
         return $rc;

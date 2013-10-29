@@ -17,8 +17,8 @@ function ciniki_clicktracker_statsByDays($ciniki) {
     //  
     ciniki_core_loadMethod($ciniki, 'ciniki', 'core', 'private', 'prepareArgs');
     $rc = ciniki_core_prepareArgs($ciniki, 'no', array(
-        'business_id'=>array('required'=>'yes', 'blank'=>'no', 'errmsg'=>'No business specified'), 
-		'days'=>array('required'=>'yes', 'blank'=>'no', 'errmsg'=>'No days specified'),
+        'business_id'=>array('required'=>'yes', 'blank'=>'no', 'name'=>'Business'), 
+		'days'=>array('required'=>'yes', 'blank'=>'no', 'name'=>'Days'),
         )); 
     if( $rc['stat'] != 'ok' ) { 
         return $rc;
