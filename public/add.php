@@ -36,24 +36,24 @@ function ciniki_clicktracker_add($ciniki) {
         return $rc;
     }   
 
-	//
-	// Add the click to the database
-	//
-	$strsql = "INSERT INTO ciniki_clicktracker (business_id, user_id, "
-		. "panel_id, item_clicked, "
-		. "date_added) VALUES ("
-		. "'" . ciniki_core_dbQuote($ciniki, $args['business_id']) . "', "
-		. "'" . ciniki_core_dbQuote($ciniki, $ciniki['session']['user']['id']) . "', "
-		. "'" . ciniki_core_dbQuote($ciniki, $args['panel_id']) . "', "
-		. "'" . ciniki_core_dbQuote($ciniki, $args['item']) . "', "
-		. "UTC_TIMESTAMP())"
-		. "";
+    //
+    // Add the click to the database
+    //
+    $strsql = "INSERT INTO ciniki_clicktracker (business_id, user_id, "
+        . "panel_id, item_clicked, "
+        . "date_added) VALUES ("
+        . "'" . ciniki_core_dbQuote($ciniki, $args['business_id']) . "', "
+        . "'" . ciniki_core_dbQuote($ciniki, $ciniki['session']['user']['id']) . "', "
+        . "'" . ciniki_core_dbQuote($ciniki, $args['panel_id']) . "', "
+        . "'" . ciniki_core_dbQuote($ciniki, $args['item']) . "', "
+        . "UTC_TIMESTAMP())"
+        . "";
     ciniki_core_loadMethod($ciniki, 'ciniki', 'core', 'private', 'dbInsert');
-	$rc = ciniki_core_dbInsert($ciniki, $strsql, 'ciniki.clicktracker');
-	if( $rc['stat'] != 'ok' ) { 
-		return $rc;
-	}
+    $rc = ciniki_core_dbInsert($ciniki, $strsql, 'ciniki.clicktracker');
+    if( $rc['stat'] != 'ok' ) { 
+        return $rc;
+    }
 
-	return array('stat'=>'ok');
+    return array('stat'=>'ok');
 }
 ?>

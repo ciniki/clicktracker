@@ -18,7 +18,7 @@ function ciniki_clicktracker_statsByDays($ciniki) {
     ciniki_core_loadMethod($ciniki, 'ciniki', 'core', 'private', 'prepareArgs');
     $rc = ciniki_core_prepareArgs($ciniki, 'no', array(
         'business_id'=>array('required'=>'yes', 'blank'=>'no', 'name'=>'Business'), 
-		'days'=>array('required'=>'yes', 'blank'=>'no', 'name'=>'Days'),
+        'days'=>array('required'=>'yes', 'blank'=>'no', 'name'=>'Days'),
         )); 
     if( $rc['stat'] != 'ok' ) { 
         return $rc;
@@ -35,26 +35,26 @@ function ciniki_clicktracker_statsByDays($ciniki) {
         return $rc;
     }   
 
-	//
-	// Get the stats from the database
-	//
-	$strsql = "SELECT CONCAT_WS('-', panel_id, item_clicked) AS cid, panel_id, item_clicked AS item, COUNT(*) AS clicked "
-		. "FROM ciniki_clicktracker "
-		. "WHERE business_id = '" . ciniki_core_dbQuote($ciniki, $args['business_id']) . "' "
-		. "AND date_added >= DATE_SUB(UTC_TIMESTAMP(), INTERVAL '" . ciniki_core_dbQuote($ciniki, $args['days']) . "' DAY) "
-		. "GROUP BY panel_id, item "
-		. "ORDER BY panel_id, item "
-		. "";
+    //
+    // Get the stats from the database
+    //
+    $strsql = "SELECT CONCAT_WS('-', panel_id, item_clicked) AS cid, panel_id, item_clicked AS item, COUNT(*) AS clicked "
+        . "FROM ciniki_clicktracker "
+        . "WHERE business_id = '" . ciniki_core_dbQuote($ciniki, $args['business_id']) . "' "
+        . "AND date_added >= DATE_SUB(UTC_TIMESTAMP(), INTERVAL '" . ciniki_core_dbQuote($ciniki, $args['days']) . "' DAY) "
+        . "GROUP BY panel_id, item "
+        . "ORDER BY panel_id, item "
+        . "";
     ciniki_core_loadMethod($ciniki, 'ciniki', 'core', 'private', 'dbHashQueryTree');
-	$rc = ciniki_core_dbHashQueryTree($ciniki, $strsql, 'ciniki.clicktracker', 
-		array(
-			array('container'=>'stats', 'fname'=>'cid', 'name'=>'stat',
-				'fields'=>array('panel_id', 'item', 'clicked'))
-			));
-	if( $rc['stat'] != 'ok' ) { 
-		return $rc;
-	}
+    $rc = ciniki_core_dbHashQueryTree($ciniki, $strsql, 'ciniki.clicktracker', 
+        array(
+            array('container'=>'stats', 'fname'=>'cid', 'name'=>'stat',
+                'fields'=>array('panel_id', 'item', 'clicked'))
+            ));
+    if( $rc['stat'] != 'ok' ) { 
+        return $rc;
+    }
 
-	return array('stat'=>'ok', 'stats'=>$rc['stats']);
+    return array('stat'=>'ok', 'stats'=>$rc['stats']);
 }
 ?>

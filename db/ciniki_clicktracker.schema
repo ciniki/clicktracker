@@ -5,22 +5,22 @@
 #
 # Fields
 # -------
-# business_id:		The business the click is attached to.
+# business_id:      The business the click is attached to.
 #
-# user_id:			Who made the click
+# user_id:          Who made the click
 #
-# panel_id:			The panel where the click was made.  This is the combination of panel and name,
-#					and should be unique within the entire interface.
+# panel_id:         The panel where the click was made.  This is the combination of panel and name,
+#                   and should be unique within the entire interface.
 #
-# item_clicked:		The list item label that was clicked.
+# item_clicked:     The list item label that was clicked.
 #
 # date_added:       The UTC date and time the thread was added.
 #
 create table ciniki_clicktracker (
-	business_id int not null,
-	user_id int not null,
-	panel_id varchar(250) not null,
-	item_clicked varchar(100) not null,
+    business_id int not null,
+    user_id int not null,
+    panel_id varchar(250) not null,
+    item_clicked varchar(100) not null,
     date_added datetime not null,
-	index (business_id, date_added)
+    index (business_id, date_added)
 ) ENGINE='InnoDB', COMMENT='v1.01';
