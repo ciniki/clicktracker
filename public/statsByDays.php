@@ -17,7 +17,7 @@ function ciniki_clicktracker_statsByDays($ciniki) {
     //  
     ciniki_core_loadMethod($ciniki, 'ciniki', 'core', 'private', 'prepareArgs');
     $rc = ciniki_core_prepareArgs($ciniki, 'no', array(
-        'business_id'=>array('required'=>'yes', 'blank'=>'no', 'name'=>'Business'), 
+        'tnid'=>array('required'=>'yes', 'blank'=>'no', 'name'=>'Tenant'), 
         'days'=>array('required'=>'yes', 'blank'=>'no', 'name'=>'Days'),
         )); 
     if( $rc['stat'] != 'ok' ) { 
@@ -27,10 +27,10 @@ function ciniki_clicktracker_statsByDays($ciniki) {
     
     //  
     // Make sure this module is activated, and
-    // check permission to run this function for this business
+    // check permission to run this function for this tenant
     //  
     ciniki_core_loadMethod($ciniki, 'ciniki', 'clicktracker', 'private', 'checkAccess');
-    $rc = ciniki_clicktracker_checkAccess($ciniki, $args['business_id'], 'ciniki.clicktracker.statsByDays'); 
+    $rc = ciniki_clicktracker_checkAccess($ciniki, $args['tnid'], 'ciniki.clicktracker.statsByDays'); 
     if( $rc['stat'] != 'ok' ) { 
         return $rc;
     }   
@@ -40,7 +40,7 @@ function ciniki_clicktracker_statsByDays($ciniki) {
     //
     $strsql = "SELECT CONCAT_WS('-', panel_id, item_clicked) AS cid, panel_id, item_clicked AS item, COUNT(*) AS clicked "
         . "FROM ciniki_clicktracker "
-        . "WHERE business_id = '" . ciniki_core_dbQuote($ciniki, $args['business_id']) . "' "
+        . "WHERE tnid = '" . ciniki_core_dbQuote($ciniki, $args['tnid']) . "' "
         . "AND date_added >= DATE_SUB(UTC_TIMESTAMP(), INTERVAL '" . ciniki_core_dbQuote($ciniki, $args['days']) . "' DAY) "
         . "GROUP BY panel_id, item "
         . "ORDER BY panel_id, item "

@@ -7,12 +7,12 @@
 // Arguments
 // ---------
 // ciniki:
-// business_id:     The ID of the business to get clicktracker for.
+// tnid:     The ID of the tenant to get clicktracker for.
 //
 // Returns
 // -------
 //
-function ciniki_clicktracker_hooks_uiSettings($ciniki, $business_id, $args) {
+function ciniki_clicktracker_hooks_uiSettings($ciniki, $tnid, $args) {
 
     //
     // Setup the default response
@@ -22,7 +22,7 @@ function ciniki_clicktracker_hooks_uiSettings($ciniki, $business_id, $args) {
     //
     // Check permissions for what menu items should be available
     //
-    if( isset($ciniki['business']['modules']['ciniki.clicktracker']) && ($ciniki['session']['user']['perms']&0x01) == 0x01 ) {
+    if( isset($ciniki['tenant']['modules']['ciniki.clicktracker']) && ($ciniki['session']['user']['perms']&0x01) == 0x01 ) {
         $menu_item = array(
             'priority'=>3000,
             'label'=>'Click Tracking', 

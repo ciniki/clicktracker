@@ -129,7 +129,7 @@ function ciniki_clicktracker_main() {
     this.showByDays = function(cb, days) {
         this.bydays.sections.tabs.selected = days;
         this.bydays.data = {};
-        var rsp = M.api.getJSON('ciniki.clicktracker.statsByDays', {'business_id':M.curBusinessID, 'days':days});
+        var rsp = M.api.getJSON('ciniki.clicktracker.statsByDays', {'tnid':M.curTenantID, 'days':days});
         if( rsp['stat'] != 'ok' ) {
             M.api.err(rsp);
             return false;
@@ -147,7 +147,7 @@ function ciniki_clicktracker_main() {
         this.bydaysbyusers.sections.tabs.selected = days;
         this.bydaysbyusers.data = {};
         this.bydaysbyusers.users = {};
-        var rsp = M.api.getJSON('ciniki.clicktracker.statsByDaysByUser', {'business_id':M.curBusinessID, 'days':days});
+        var rsp = M.api.getJSON('ciniki.clicktracker.statsByDaysByUser', {'tnid':M.curTenantID, 'days':days});
         if( rsp['stat'] != 'ok' ) {
             M.api.err(rsp);
             return false;

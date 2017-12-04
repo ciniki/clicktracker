@@ -17,7 +17,7 @@ function ciniki_clicktracker_statsByDaysByUser($ciniki) {
     //  
     ciniki_core_loadMethod($ciniki, 'ciniki', 'core', 'private', 'prepareArgs');
     $rc = ciniki_core_prepareArgs($ciniki, 'no', array(
-        'business_id'=>array('required'=>'yes', 'blank'=>'no', 'name'=>'Business'), 
+        'tnid'=>array('required'=>'yes', 'blank'=>'no', 'name'=>'Tenant'), 
         'days'=>array('required'=>'yes', 'blank'=>'no', 'name'=>'Days'),
         )); 
     if( $rc['stat'] != 'ok' ) { 
@@ -27,10 +27,10 @@ function ciniki_clicktracker_statsByDaysByUser($ciniki) {
     
     //  
     // Make sure this module is activated, and
-    // check permission to run this function for this business
+    // check permission to run this function for this tenant
     //  
     ciniki_core_loadMethod($ciniki, 'ciniki', 'clicktracker', 'private', 'checkAccess');
-    $rc = ciniki_clicktracker_checkAccess($ciniki, $args['business_id'], 'ciniki.clicktracker.statsByDaysByUser'); 
+    $rc = ciniki_clicktracker_checkAccess($ciniki, $args['tnid'], 'ciniki.clicktracker.statsByDaysByUser'); 
     if( $rc['stat'] != 'ok' ) { 
         return $rc;
     }   
@@ -41,7 +41,7 @@ function ciniki_clicktracker_statsByDaysByUser($ciniki) {
     $strsql = "SELECT DISTINCT ciniki_clicktracker.user_id, ciniki_users.display_name "
         . "FROM ciniki_clicktracker "
         . "LEFT JOIN ciniki_users ON (ciniki_clicktracker.user_id = ciniki_users.id) "
-        . "WHERE ciniki_clicktracker.business_id = '" . ciniki_core_dbQuote($ciniki, $args['business_id']) . "' "
+        . "WHERE ciniki_clicktracker.tnid = '" . ciniki_core_dbQuote($ciniki, $args['tnid']) . "' "
         . "AND ciniki_clicktracker.date_added >= DATE_SUB(UTC_TIMESTAMP(), INTERVAL '" . ciniki_core_dbQuote($ciniki, $args['days']) . "' DAY) "
         . "ORDER BY display_name "
         . "";
@@ -63,7 +63,7 @@ function ciniki_clicktracker_statsByDaysByUser($ciniki) {
         . "ciniki_users.display_name AS name, COUNT(*) AS clicked "
         . "FROM ciniki_clicktracker "
         . "LEFT JOIN ciniki_users ON (ciniki_clicktracker.user_id = ciniki_users.id) "
-        . "WHERE business_id = '" . ciniki_core_dbQuote($ciniki, $args['business_id']) . "' "
+        . "WHERE tnid = '" . ciniki_core_dbQuote($ciniki, $args['tnid']) . "' "
         . "AND ciniki_clicktracker.date_added >= DATE_SUB(UTC_TIMESTAMP(), INTERVAL '" . ciniki_core_dbQuote($ciniki, $args['days']) . "' DAY) "
         . "GROUP BY panel_id, item, name "
         . "ORDER BY panel_id, item, name "
