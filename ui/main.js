@@ -118,7 +118,7 @@ function ciniki_clicktracker_main() {
         //
         var appContainer = M.createContainer(appPrefix, 'ciniki_clicktracker_main', 'yes');
         if( appContainer == null ) {
-            alert('App Error');
+            M.alert('App Error');
             return false;
         } 
 
